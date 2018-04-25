@@ -1,4 +1,4 @@
-package algorithm.tree;
+package tree;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;

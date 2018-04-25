@@ -1,4 +1,4 @@
-package algorithm.dp;
+package dp;
 
 public class ContinousSortedSubArray {
 	public static void main(String[] args) {

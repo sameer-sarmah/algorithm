@@ -1,4 +1,4 @@
-package algorithm.tree;
+package tree;
 
 public class SegmentedTreeNode<T extends Comparable<T>> extends TreeNode<T> {
 

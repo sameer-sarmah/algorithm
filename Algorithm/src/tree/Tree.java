@@ -1,4 +1,4 @@
-package algorithm.tree;
+package tree;
 
 public interface Tree<T extends Comparable<T>> {
 public TreeNode<T> search(T value);

@@ -1,4 +1,4 @@
-package algorithm.tree;
+package tree;
 
 /*
  * if are is no left child then print the node and move to right and repeat

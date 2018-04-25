@@ -1,13 +1,13 @@
-package algorithm.heap;
+package heap;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import algorithm.tree.BFS;
-import algorithm.tree.Tree;
-import algorithm.tree.TreeNode;
+import tree.BFS;
+import tree.Tree;
+import tree.TreeNode;
 
 public class Heap<T extends Comparable<T>> implements Tree<T> {
 	private TreeNode<T> root,lastInserted;

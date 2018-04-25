@@ -1,4 +1,4 @@
-package algorithm.tree;
+package tree;
 
 public class TreeNode<T extends Comparable<T>>
 {

@@ -1,4 +1,4 @@
-package algorithm.tree.rb;
+package tree.rb;
 
 public class RBTreeDriver {
 

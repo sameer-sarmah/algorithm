@@ -1,7 +1,7 @@
-package algorithm.tree.rb;
+package tree.rb;
 
-import algorithm.tree.BFS;
-import algorithm.tree.TreeNode;
+import tree.BFS;
+import tree.TreeNode;
 
 /*
  * newly created nodes are always red

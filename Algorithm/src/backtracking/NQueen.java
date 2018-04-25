@@ -1,4 +1,4 @@
-package algorithm.backtracking;
+package backtracking;
 
 import java.util.Arrays;
 

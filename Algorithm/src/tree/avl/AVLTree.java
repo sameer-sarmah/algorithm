@@ -1,8 +1,8 @@
-package algorithm.tree.avl;
+package tree.avl;
 
-import algorithm.tree.BFS;
-import algorithm.tree.Tree;
-import algorithm.tree.TreeNode;
+import tree.BFS;
+import tree.Tree;
+import tree.TreeNode;
 /*
  * 
 balance factor = (max depth of left subtree) - (max depth of right subtree)

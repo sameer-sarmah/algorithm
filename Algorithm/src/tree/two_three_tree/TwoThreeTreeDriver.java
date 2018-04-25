@@ -1,4 +1,4 @@
-package algorithm.tree.two_three_tree;
+package tree.two_three_tree;
 
 public class TwoThreeTreeDriver {
 	public static void main(String[] args) {

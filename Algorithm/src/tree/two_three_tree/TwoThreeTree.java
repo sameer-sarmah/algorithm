@@ -1,4 +1,4 @@
-package algorithm.tree.two_three_tree;
+package tree.two_three_tree;
 
 import java.util.HashMap;
 import java.util.Map;

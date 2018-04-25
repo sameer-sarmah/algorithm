@@ -1,6 +1,6 @@
-package algorithm.tree.rb;
+package tree.rb;
 
-import algorithm.tree.TreeNode;
+import tree.TreeNode;
 
 public class RBTreeNode<T extends Comparable<T>>  extends TreeNode<T> {
 

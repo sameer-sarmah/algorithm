@@ -1,4 +1,4 @@
-package algorithm.bnb;
+package bnb;
 
 import java.util.*;
 

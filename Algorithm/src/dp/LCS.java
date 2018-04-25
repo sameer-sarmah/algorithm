@@ -1,4 +1,4 @@
-package algorithm.dp;
+package dp;
 //longest common subsequence
 public class LCS {
 

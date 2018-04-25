@@ -1,4 +1,4 @@
-package algorithm.tree.avl;
+package tree.avl;
 
 public class AVLTreeDriver {
 

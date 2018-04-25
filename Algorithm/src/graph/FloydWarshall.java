@@ -1,4 +1,4 @@
-package algorithm.graph;
+package graph;
 
 import java.util.Arrays;
 import java.util.HashMap;

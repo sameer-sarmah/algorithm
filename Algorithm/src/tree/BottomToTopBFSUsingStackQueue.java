@@ -1,4 +1,4 @@
-package algorithm.tree;
+package tree;
 
 import java.util.Queue;
 import java.util.Stack;

@@ -1,6 +1,6 @@
-package algorithm.tree.avl;
+package tree.avl;
 
-import algorithm.tree.TreeNode;
+import tree.TreeNode;
 
 public class AVLTreeNode<T extends Comparable<T>>  extends TreeNode<T>{
    private int maxLeftSubTreeDepth=0,maxRightSubTreeDepth=0;

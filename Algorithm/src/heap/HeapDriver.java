@@ -1,4 +1,4 @@
-package algorithm.heap;
+package heap;
 
 public class HeapDriver {
 	public static void main(String[] args) {
