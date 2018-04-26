@@ -5,10 +5,7 @@ public class IsBalanced {
 	public static void main(String[] args) {
 		TreeNode<Integer> root = TreeCreator.createTree();
         int balanceFactor= findBalanced(root);
-        if(Math.abs(balanceFactor)<2)
-        System.out.println("Balanced");
-        else
-        System.out.println("Unbalanced");	
+	
 	}
 
 	public static int findBalanced(TreeNode<Integer> node) {
