@@ -24,8 +24,14 @@ public class IsBalanced {
 		} else {
 			maxRightSubtreeDepth = findBalanced(node.getRight());
 		}
-
-		return maxLeftSubtreeDepth - maxRightSubtreeDepth;
+		int balanceFactor=maxLeftSubtreeDepth - maxRightSubtreeDepth;
+		if(Math.abs(balanceFactor)<2) {
+	        System.out.println(node+"is Balanced");
+		}
+        else {
+        	System.out.println(node+"is Unbalanced");
+        }
+		return Math.max(maxLeftSubtreeDepth, maxRightSubtreeDepth);
 
 	}
 }
