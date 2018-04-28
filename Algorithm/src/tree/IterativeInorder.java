@@ -5,7 +5,7 @@ import java.util.Stack;
 public class IterativeInorder {
 
 	public static void main(String[] args) {
-		TreeNode<Integer> root = TreeCreator.createTree();
+		TreeNode<Integer> root = TreeCreator.createBinarySearchTree();
 		iterativeInOrder(root);
 	}
 

@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class BottomToTopBFSUsingStackQueue {
 	public static void main(String[] args) {
-		TreeNode<Integer> root = TreeCreator.createTree();
+		TreeNode<Integer> root = TreeCreator.createBinarySearchTree();
 		bottomToTopBFS(root);
 	}
 	

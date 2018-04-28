@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class AlternateBST {
 	public static void main(String[] args) {
-		TreeNode<Integer> root = TreeCreator.createTree();
+		TreeNode<Integer> root = TreeCreator.createBinarySearchTree();
 		Cell<Integer> cell = new Cell<Integer>(0,0,root);
 		List<Cell<Integer>> list=new ArrayList<>();
 		list.add(cell);

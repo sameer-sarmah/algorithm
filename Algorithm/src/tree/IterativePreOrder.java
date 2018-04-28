@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class IterativePreOrder {
 	public static void main(String[] args) {
-		TreeNode<Integer> root = TreeCreator.createTree();
+		TreeNode<Integer> root = TreeCreator.createBinarySearchTree();
 		Stack<TreeNode<Integer>> callStack = new Stack<TreeNode<Integer>>();
 		callStack.push(root);
 		iterativePreOrder(callStack);

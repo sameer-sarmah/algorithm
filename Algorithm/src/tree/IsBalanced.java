@@ -3,8 +3,8 @@ package tree;
 public class IsBalanced {
 
 	public static void main(String[] args) {
-		TreeNode<Integer> root = TreeCreator.createTree();
-        int balanceFactor= findBalanced(root);
+		TreeNode<Integer> root = TreeCreator.createBinarySearchTree();
+        findBalanced(root);
 	
 	}
 

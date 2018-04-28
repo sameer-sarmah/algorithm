@@ -5,7 +5,7 @@ import java.util.Stack;
 public class AlternateBSTUsingStack {
 
 	public static void main(String[] args) {
-		TreeNode<Integer> root = TreeCreator.createTree();
+		TreeNode<Integer> root = TreeCreator.createBinarySearchTree();
 		Stack<TreeNode<Integer>> rightToLeft=new Stack<>();
 		rightToLeft.push(root);
 		System.out.printf(root.getValue()+" ");

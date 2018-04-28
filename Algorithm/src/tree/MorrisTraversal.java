@@ -9,7 +9,7 @@ package tree;
 public class MorrisTraversal {
 
 	public static void main(String[] args) {
-		TreeNode<Integer> root = TreeCreator.createTree();
+		TreeNode<Integer> root = TreeCreator.createBinarySearchTree();
 		traverse(root);
 	}
 
