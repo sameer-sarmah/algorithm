@@ -88,7 +88,31 @@ class CoinInfo {
 	public String toString() {
 		return "CoinInfo [denomination=" + coin + ", count=" + count + "]";
 	}
-	
-	
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + coin;
+		result = prime * result + count;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CoinInfo other = (CoinInfo) obj;
+		if (coin != other.coin)
+			return false;
+		if (count != other.count)
+			return false;
+		return true;
+	}
+	
+	
 }
