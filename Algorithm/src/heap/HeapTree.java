@@ -9,7 +9,7 @@ import tree.BFS;
 import tree.Tree;
 import tree.TreeNode;
 
-public class Heap<T extends Comparable<T>> implements Tree<T> {
+public class HeapTree<T extends Comparable<T>> implements Tree<T> {
 	private TreeNode<T> root,lastInserted;
 	private Queue<TreeNode<T>> queue = new LinkedBlockingQueue<>();
 	private List<TreeNode<T>> visited = new ArrayList<>();

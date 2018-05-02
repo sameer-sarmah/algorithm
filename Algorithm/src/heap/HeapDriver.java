@@ -2,7 +2,7 @@ package heap;
 
 public class HeapDriver {
 	public static void main(String[] args) {
-		Heap<Integer> heap = new Heap<>();
+		HeapTree<Integer> heap = new HeapTree<>();
 		for (int i = 5; i >0; i--) {
 			heap.insert(i);
 		}
