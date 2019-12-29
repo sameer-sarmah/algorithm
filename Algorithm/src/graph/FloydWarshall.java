@@ -7,28 +7,18 @@ import java.util.Map;
 public class FloydWarshall {
 	private static int MAX_VALUE = 1000;
 	// S A B C T
-	int[][] am = { { 0, 7, 6, MAX_VALUE, 2 }, 
-			{ 7, 0, 8, 3, 9 }, 
-			{ 6, 8, 0, 2, 4 },
-			{ MAX_VALUE, 3, 2, 0, 7 }, 
-			{ 2, 9, 4, 7, 0 } };
+	int[][] am = { 
+			{ 0, 7, 6, MAX_VALUE, MAX_VALUE }, 
+			{ MAX_VALUE, 0, MAX_VALUE, -3, 9 }, 
+			{ MAX_VALUE, 8, 0, 5, -4 },
+			{ MAX_VALUE, MAX_VALUE, -2, 0, MAX_VALUE }, 
+			{ 2, MAX_VALUE, MAX_VALUE, 7, 0 } };
 	final int N = am.length;
-	Map<Integer, String> map = new HashMap<>();
 
 	public FloydWarshall() {
 		super();
-		this.populateMap();
 	}
 
-	private void populateMap() {
-		map.put(0, "S");
-		map.put(1, "A");
-		map.put(2, "B");
-		map.put(3, "C");
-		map.put(4, "T");
-
-	}
-	
 	private void printAM(){
 		for(int [] arr :am)
 		{
@@ -44,12 +34,15 @@ public class FloydWarshall {
 		// The middle loop holds the index of A
 		// The innermost loop holds the index of T
 		// if SA+AT<ST the make ST=SA+AT
-		for (int k = 0; k < N; k++) {
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < N; j++)
+		for (int fromNode = 0; fromNode < N; fromNode++) {
+			for (int firstLayer = 0; firstLayer < N; firstLayer++) {
+				for (int secondLayer = 0; secondLayer < N; secondLayer++)
 				{
-					if (am[k][i] + am[i][j] < am[k][j]) {
-						am[k][j] =am[k][i] + am[i][j];
+					int existingDistanceToSecondLayerNode = am[fromNode][secondLayer];
+					int distanceFromCurrentNodeToFirstLayerNode = am[fromNode][firstLayer];
+					int distanceFromFirstLayerNodeToSecondLayerNode = am[firstLayer][secondLayer];
+					if (distanceFromCurrentNodeToFirstLayerNode + distanceFromFirstLayerNodeToSecondLayerNode < existingDistanceToSecondLayerNode) {
+						am[fromNode][secondLayer] =distanceFromCurrentNodeToFirstLayerNode + distanceFromFirstLayerNodeToSecondLayerNode;
 					}
 				}
 			}
