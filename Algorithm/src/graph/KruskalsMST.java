@@ -154,7 +154,7 @@ class DisjointSetPool {
 				edgeSet.add(edge);
 				contains = true;
 				break;
-			} else if (ds.getSet().contains(edge.getSource()) && !ds.getSet().contains(edge.getTarget())) {
+			} else if (ds.getSet().contains(edge.getSource()) && ds.getSet().contains(edge.getTarget())) {
 				System.out.println("Will cause cycle");
 				isCyclic = true;
 				break;
