@@ -45,6 +45,10 @@ public class NQueenRowWise {
         }
         i = row;
         j = col;
+		/*
+		 * As we are placing queens in a row wise manner we know that there won't we any 
+		 * already placed queen on upper rows than current "row"
+		 * */
         while (i >= 0 && j < N) {
             if (board[i][j] == 1)
                 return false;
