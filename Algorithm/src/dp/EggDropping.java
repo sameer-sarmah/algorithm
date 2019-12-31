@@ -8,8 +8,13 @@ import java.util.List;
 public class EggDropping {
 	private int numOfEggs = 3;
 	private int numOfFloors = 5;
-	//eggs are represented by rows & starts at index 1
-	//number of floors are represented by columns & starts at index 1
+	/*eggs are represented by rows & starts at index 1
+	number of floors are represented by columns & starts at index 1
+	the value in the matrix stores the maximum number of attempts
+	2 floors and 1 egg ,if the egg breaks in 1st floor ,first param is 1 as the no of attempts is 1
+	if the egg does not break we have 1 egg and 1 more floor to test in addition to this attempt i.e total is 2
+	we will take the maximum of the two therefore 2
+	 * */
 	private int[][] eggToFloorMatrix = new int[numOfEggs + 1][numOfFloors + 1];
 
 	public void populateData() {
