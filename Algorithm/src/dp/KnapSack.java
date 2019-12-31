@@ -6,8 +6,8 @@ import java.util.List;
 
 public class KnapSack {
 	private int MAX_WEIGHT = 13;
-	private List<Item> list = new ArrayList<>();
-	private int[][] arr;
+	private List<Item> availableItems = new ArrayList<>();
+	private int[][] itemsToWeightMatrix;
 
 	public KnapSack() {
 		super();
@@ -15,22 +15,29 @@ public class KnapSack {
 	}
 
 	private void populateItems() {
-		list.add(new Item(1, 5, 5));
-		list.add(new Item(2, 6, 4));
-		list.add(new Item(3, 8, 7));
-		list.add(new Item(3, 4, 7));
-		arr = new int[list.size() + 1][MAX_WEIGHT + 1];
+		//assume these are the available items in infinite numbers
+		availableItems.add(new Item(1, 5, 5));
+		availableItems.add(new Item(2, 6, 4));
+		availableItems.add(new Item(3, 8, 7));
+		availableItems.add(new Item(4, 4, 7));
+		//the items are the rows and start from index 1
+		//weight are the columns and start from index 1
+		itemsToWeightMatrix = new int[availableItems.size() + 1][MAX_WEIGHT + 1];
 	}
 
 	public void knapSackSelection() {
-		for (int i = 1; i <= list.size(); i++) {
+		for (int i = 1; i <= availableItems.size(); i++) {
+			Item it = availableItems.get(i-1);
 			for (int weight = 1; weight <= MAX_WEIGHT; weight++) {
-				Item it = list.get(i-1);
+				
+				//item too heavy to fulfill the weight criterion
 				if (weight < it.getWeight()) {
-					arr[i][weight] = arr[i - 1][weight];
-				} else {
-					arr[i][weight] = Math.max(arr[i][weight - it.getWeight()],
-							arr[i][weight - it.getWeight()] + it.getValue());
+					itemsToWeightMatrix[i][weight] = itemsToWeightMatrix[i - 1][weight];
+				} 
+				else {
+					int existingValueWithoutThisItem = itemsToWeightMatrix[i][weight - it.getWeight()];
+					int updatedValueAfterIncludingThisItem = itemsToWeightMatrix[i][weight - it.getWeight()] + it.getValue();
+					itemsToWeightMatrix[i][weight] = Math.max(existingValueWithoutThisItem,updatedValueAfterIncludingThisItem);
 				}
 
 			}
@@ -39,8 +46,8 @@ public class KnapSack {
 	}
 
 	private void print() {
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(Arrays.toString(arr[i]));
+		for (int i = 0; i < itemsToWeightMatrix.length; i++) {
+			System.out.println(Arrays.toString(itemsToWeightMatrix[i]));
 		}
 	}
 	

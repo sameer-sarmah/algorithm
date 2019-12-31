@@ -13,7 +13,7 @@ public class BoxStacking {
     
 private boolean canSitOn(Box b1,Box b2)
 {
-    if (b1.getArea() > b2.getArea() && (b1.getWidth()>b2.getWidth()) &&(b1.getLength()>b2.getLength()))
+    if ((b1.getWidth()>b2.getWidth()) &&(b1.getLength()>b2.getLength()))
         return true;
     else
         return false;

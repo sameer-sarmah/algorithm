@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+/*
+ * All possible combination
+ * */
 public class CoinChangeWays {
  public static void main(String[] args) {
 	 List<Integer> denominations = Arrays.asList(1, 5, 10, 15, 25);
@@ -25,8 +27,9 @@ private static  List<List<CoinInfo>> findDenominations(int queryAmount, List<Int
 
 				if (denomination <= amount) {
 					int numberOfCoinsOfThisDenominationRequired = amount / denomination;
+					//pre 
 					for (int numberOfthisDenomination = 1; numberOfthisDenomination <= numberOfCoinsOfThisDenominationRequired; numberOfthisDenomination++) {
-						int remainingAmount = (amount - numberOfthisDenomination * denomination);
+						int remainingAmount = (amount - (numberOfthisDenomination * denomination));
 						CoinInfo thisDenomination = new CoinInfo(denomination, numberOfthisDenomination);
 						List<List<CoinInfo>> coinChangePermutations=new ArrayList<>();
 						List<CoinInfo> coinsList = new ArrayList<>();
@@ -41,6 +44,7 @@ private static  List<List<CoinInfo>> findDenominations(int queryAmount, List<Int
 						}else {
 							coinChangePermutations.add(coinsList);
 						}
+						
 						if (cachedResult.get(amount) == null) {
 							cachedResult.put(amount, coinChangePermutations);
 						} else {

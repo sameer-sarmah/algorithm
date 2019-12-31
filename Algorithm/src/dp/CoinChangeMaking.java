@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//this doesnot pre compute and pre populate the cache but the cache is populated on demand 
 public class CoinChangeMaking {
 
 	public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class CoinChangeMaking {
 	}
 
 	public static List<CoinInfo> findDenominations(int amount, List<Integer> denominations) {
-		Map<Integer, List<CoinInfo>> cachedResult = new HashMap<>();
+		Map<Integer, List<CoinInfo>> amountToCoinInfos = new HashMap<>();
 		for (int denomination : denominations) {
 			
 			if (denomination <= amount) {
@@ -25,28 +25,39 @@ public class CoinChangeMaking {
 				CoinInfo thisDenomination = new CoinInfo(denomination, numberOfCoinsOfThisDenominationRequired);
 				List<CoinInfo> coins = new ArrayList<>();
 				coins.add(thisDenomination);
+				
+				// let's say the currentCoin = 4, currentAmount = 5, number of 4Rs coin required
+				// to make 4Rs is 1 and additional 1Re is required
 				if(remainingAmount>0) {
-					if (cachedResult.get(remainingAmount) != null) {
-						coins.addAll(cachedResult.get(remainingAmount));
+					//if the coins required to add up to 1Re is present in the cache i.e amountToCoinInfos we use the same
+					if (amountToCoinInfos.get(remainingAmount) != null) {
+						coins.addAll(amountToCoinInfos.get(remainingAmount));
 					}
+					//if the coins required to add up to 1Re is not present in the cache i.e amountToCoinInfos we calculate it and update the cache for the amount 
 					else {
 						List<CoinInfo> remainingAmountCoinList=findDenominations(remainingAmount,denominations);
 						coins.addAll(remainingAmountCoinList);
-						cachedResult.put(remainingAmount, remainingAmountCoinList);
+						amountToCoinInfos.put(remainingAmount, remainingAmountCoinList);
 					}	
 				}
-				
-				if (cachedResult.get(amount) == null) {
-					cachedResult.put(amount, coins);
-				} else {
+				// let's say the currentCoin = 1, currentAmount = 5, number of 1Re coin required to make 5Rs is 5
+				if (amountToCoinInfos.get(amount) == null) {
+					amountToCoinInfos.put(amount, coins);
+				} 
+				// let's say the currentCoin = 4, currentAmount = 5, number of 4Rs coin required
+				// to make 4Rs is 1 and additional 1Re is required
+				else {
 					int totalCoins = numberOfCoinsOfThisDenominationRequired;
-					List<CoinInfo> remainingAmountCoins = cachedResult.get(remainingAmount);
+					List<CoinInfo> remainingAmountCoins = amountToCoinInfos.get(remainingAmount);
 					if (remainingAmount>0 && remainingAmountCoins != null) {
 						totalCoins += totalCoinsFromCoinList(remainingAmountCoins);
 					}
-
-					if (totalCoins < totalCoinsFromCoinList(cachedResult.get(amount))) {
-						cachedResult.put(amount, coins);
+					/*lets say the amount is 11,and let's say amountToCoinInfos has value (coin = 1Re,number = 11) as coin info for amount 11 
+					 *when the current coin is Rs5 then we have the calculated coin info as  {(coin = 1Re,number = 1),(coin = 5Rs,number = 2)}
+					 *since the total coin count with 5Rs coin is 3 which is lesser than 11 with 1Re coin we update the cache amountToCoinInfos
+					 * */
+					if (totalCoins < totalCoinsFromCoinList(amountToCoinInfos.get(amount))) {
+						amountToCoinInfos.put(amount, coins);
 					}
 
 				}
@@ -55,7 +66,7 @@ public class CoinChangeMaking {
 			
 			
 		}
-		return cachedResult.get(amount);
+		return amountToCoinInfos.get(amount);
 	}
 
 	public static int totalCoinsFromCoinList(List<CoinInfo> coinInfoList) {

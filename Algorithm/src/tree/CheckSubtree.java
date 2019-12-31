@@ -66,3 +66,34 @@ public class CheckSubtree {
 		
 	}
 }
+/*
+boolean checkSubTree(TreeNode<T> node,TreeNode<T> subtreeNode)
+
+if (node.getValue().compareTo(subtreeNode.getValue()) == 0){
+	if(subtreeNode.getLeft() == null && subtreeNode.getRight() == null){
+		return true;
+	}
+	else if(subtreeNode.getLeft() != null && subtreeNode.getRight() == null && node.getLeft() != null){
+		return checkSubTree(node.getLeft(),subtreeNode.getLeft());
+	}
+	else if(subtreeNode.getLeft() == null && subtreeNode.getRight() != null && && node.getRight() != null){
+		return checkSubTree(node.getRight(),subtreeNode.getRight());
+	}
+	else if(subtreeNode.getLeft() != null && subtreeNode.getRight() != null && node.getLeft() != null && && node.getRight() != null){
+		return checkSubTree(node.getLeft(),subtreeNode.getLeft()) || checkSubTree(node.getRight(),subtreeNode.getRight());
+	}
+	else{
+		return false;
+	}
+} 
+
+	else if(node.getLeft() != null && node.getRight() == null){
+		return checkSubTree(node.getLeft(),subtreeNode);
+	}
+	else if(node.getLeft() == null && node.getRight() != null){
+		return checkSubTree(node.getRight(),subtreeNode);
+	}
+	else if(node.getLeft() != null && node.getRight() != null){
+		return checkSubTree(node.getLeft(),subtreeNode) || checkSubTree(node.getRight(),subtreeNode);
+	}
+*/
