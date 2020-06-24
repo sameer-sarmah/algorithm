@@ -26,18 +26,18 @@ public class KnapSack {
 	}
 
 	public void knapSackSelection() {
-		for (int i = 1; i <= availableItems.size(); i++) {
-			Item it = availableItems.get(i-1);
+		for (int itemId = 1; itemId <= availableItems.size(); itemId++) {
+			Item it = availableItems.get(itemId-1);
 			for (int weight = 1; weight <= MAX_WEIGHT; weight++) {
 				
 				//item too heavy to fulfill the weight criterion
 				if (weight < it.getWeight()) {
-					itemsToWeightMatrix[i][weight] = itemsToWeightMatrix[i - 1][weight];
+					itemsToWeightMatrix[itemId][weight] = itemsToWeightMatrix[itemId - 1][weight];
 				} 
 				else {
-					int existingValueWithoutThisItem = itemsToWeightMatrix[i][weight - it.getWeight()];
-					int updatedValueAfterIncludingThisItem = itemsToWeightMatrix[i][weight - it.getWeight()] + it.getValue();
-					itemsToWeightMatrix[i][weight] = Math.max(existingValueWithoutThisItem,updatedValueAfterIncludingThisItem);
+					int existingValueWithoutThisItem = itemsToWeightMatrix[itemId][weight - it.getWeight()];
+					int updatedValueAfterIncludingThisItem = itemsToWeightMatrix[itemId][weight - it.getWeight()] + it.getValue();
+					itemsToWeightMatrix[itemId][weight] = Math.max(existingValueWithoutThisItem,updatedValueAfterIncludingThisItem);
 				}
 
 			}

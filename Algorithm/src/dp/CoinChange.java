@@ -8,13 +8,24 @@ public class CoinChange {
 	int maxSum = 5;
 	int numCoins[][] = new int[coins.length + 1][maxSum + 1];
 	List<Integer>[][] usedCoins = new ArrayList[coins.length + 1][maxSum + 1];
-	/*
-	 * numCoins 0,0,0,0,0,0 0,1,2,3,4,5 0,1,1,2,2,3 0,1,1,1,2,2 0,1,1,1,1,2
-	 *
-	 *
-	 * usedCoins 0,0,0,0,0,0 0,1,1,1,1,1 0,1,2,{1,2},{2,2},{2,2,1}
-	 * 0,1,2,3,{2,2},{2,3} 0,1,2,3,4,{2,3}
-	 */
+	   /* numCoins
+	    * 0,0,0,0,0,0 
+	    * 0,1,2,3,4,5
+	    * 0,1,1,2,2,3
+	    * 0,1,1,1,2,2
+	    * 0,1,1,1,1,2          
+		*
+		The row means the denomination,the column means the amount ,i.e numCoins[2][3] means the coins used when the amount is 3 and the denomination is 2 is 2.
+	    *
+	    * usedCoins
+	    * 0,0,0,0,0,0 
+	    * 0,1,1,1,1,1
+	    * 0,1,2,{1,2},{2,2},{2,2,1}
+	    * 0,1,2,3,{2,2},{2,3}
+		* 0,1,2,3,4,{2,3}
+		The row means the denomination,the column means the amount ,i.e usedCoins[2][3] means the coins used when the amount is 3 and the denomination is 2 is {1,2} {1 and 2 are denominations}.
+
+	    * */
 
 	private int getMinCoinChange() {
 		for (int currentCoinIndex = 0; currentCoinIndex < coins.length + 1; currentCoinIndex++) {
@@ -35,6 +46,8 @@ public class CoinChange {
 					if (numCoins[previousCoinIndex][currentAmount] > 0) {
 						// let's say the currentCoin = 4, currentAmount = 4, number of 4Rs coin required
 						// to make 4Rs is 1
+						//numberOfCurrentCoin < numCoins[currentCoinIndex - 1][currentAmount] checks if the number of coins required with current coin 
+						//is less than the number of coins required with its previous denomination
 						if (remainder == 0 && numberOfCurrentCoin > 0
 								&& numberOfCurrentCoin < numCoins[currentCoinIndex - 1][currentAmount]) {
 							numCoins[currentCoinIndex][currentAmount] = numberOfCurrentCoin;
@@ -46,7 +59,7 @@ public class CoinChange {
 						else if (numberOfCurrentCoin > 0
 								&& numberOfCurrentCoin < numCoins[currentCoinIndex - 1][currentAmount]) {
 							/*
-							 * number of 4Rs coin needed for 5Rs is 2 number of 1Re coin needed for
+							 * number of 4Rs coin needed for 5Rs is 1, number of 1Re coin needed for
 							 * additional 1Re is 1,since we already know that as it is stored
 							 */
 							numCoins[currentCoinIndex][currentAmount] = numberOfCurrentCoin

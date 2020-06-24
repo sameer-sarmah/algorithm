@@ -29,31 +29,39 @@ private List<Box> createCombination(Box box)
 }
 
     public int findMaxHeight(List<Box> boxes) {
-        List<Box> allCombination = new ArrayList<>();
+        List<Box> boxesSortedByArea = new ArrayList<>();
         for (int i = 0; i < boxes.size(); i++) {
-            allCombination.addAll(createCombination(boxes.get(i)));
+            boxesSortedByArea.addAll(createCombination(boxes.get(i)));
         }
-        allCombination.sort(new BoxComparator());
-        System.out.println(allCombination);
-        int boxOnbox[]=new int[allCombination.size()];
+        boxesSortedByArea.sort(new BoxComparator());
+        System.out.println(boxesSortedByArea);
+        int boxOnbox[]=new int[boxesSortedByArea.size()];
         for(int i=0;i<boxOnbox.length;i++)
             boxOnbox[i]=i;
-        Integer heightArr[]=new Integer[allCombination.size()];
-        for(int i=0;i<heightArr.length;i++)
-            heightArr[i]=allCombination.get(i).getHeight();
-        for (int i = 0; i<allCombination.size(); i++) {
-            for (int j = i+1; j <allCombination.size(); j++) {
-              if(canSitOn(allCombination.get(i),allCombination.get(j)))
-              {if(heightArr[j]<heightArr[i]+allCombination.get(j).getHeight())
-                  {
-                  boxOnbox[j]=i;  
-                  heightArr[j]=heightArr[i]+allCombination.get(j).getHeight();
-                  }
-              }
-            }
-        }
         
-        return Collections.max(Arrays.asList(heightArr));
+        Integer boxHeightByBoxIndex[]=new Integer[boxesSortedByArea.size()];
+        for(int i=0;i<boxHeightByBoxIndex.length;i++)
+            boxHeightByBoxIndex[i]=boxesSortedByArea.get(i).getHeight();
+        
+		for (int bottomBoxIndex = 0; bottomBoxIndex < boxesSortedByArea.size(); bottomBoxIndex++) {
+			for (int topBoxIndex = bottomBoxIndex + 1; topBoxIndex < boxesSortedByArea.size(); topBoxIndex++) {
+				if (canSitOn(boxesSortedByArea.get(bottomBoxIndex), boxesSortedByArea.get(topBoxIndex))) {
+					/*
+					 * boxesSortedByArea.get(topBoxIndex).getHeight() is used instead of boxHeightByBoxIndex[topBoxIndex]
+					 * as boxHeightByBoxIndex[topBoxIndex] has cumulative memoized height
+					 * */
+					if (boxHeightByBoxIndex[topBoxIndex] < boxHeightByBoxIndex[bottomBoxIndex]
+							+ boxesSortedByArea.get(topBoxIndex).getHeight()) {
+						
+						boxOnbox[topBoxIndex] = bottomBoxIndex;
+						boxHeightByBoxIndex[topBoxIndex] = boxHeightByBoxIndex[bottomBoxIndex]
+								+ boxesSortedByArea.get(topBoxIndex).getHeight();
+					}
+				}
+			}
+		}
+        
+        return Collections.max(Arrays.asList(boxHeightByBoxIndex));
 
     }
 

@@ -1,24 +1,44 @@
 package dp;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class EditDistance {
-	private final String from = "kitten", to = "knitting";
-	private int[][] arr = new int[from.length() + 1][to.length() + 1];
+	private static final String from = "kitten", to = "knitting";
+	private static int[][] arr = new int[from.length() + 1][to.length() + 1];
 
 	public void calculateEditDistance() {
-		for (int i = 1; i <= from.length(); i++) {
-			for (int j = 1; j <= to.length(); j++) {
-				if (i == j && from.charAt(i-1) == to.charAt(j-1)) {
+		//when the source and target both are empty string ,i.e transform "" to ""
+		arr[0][0]=0;
+		
+		//when the source is an empty string ,i.e transform "" to "knitting",insert every character
+		for(int targetIndex = 1 ; targetIndex < to.length() ; targetIndex++) {
+			arr[0][targetIndex] = targetIndex;
+		}
+		
+		//when the target is an empty string ,i.e transform "kitten" to "",delete every character
+		for(int sourceIndex = 1 ; sourceIndex < from .length() ; sourceIndex++) {
+			arr[sourceIndex][0] = sourceIndex;
+		}
+		/*
+		 * insertion is a shift to the right,arr[source][target+1]
+		 * deletion is a shift to the bottom,arr[source+1][target]
+		 * copy/substitution is a shift diagonally,arr[source+1][target+1]
+		 * 
+		 * cost of insertion,deletion,substitution =1
+		 * cost of copying = 0
+		 * */
+		for (int sourceIndex = 1; sourceIndex <= from.length(); sourceIndex++) {
+			for (int targetIndex = 1; targetIndex <= to.length(); targetIndex++) {
+				if (sourceIndex == targetIndex && from.charAt(sourceIndex-1) == to.charAt(targetIndex-1)) {
 					// copy
-					arr[i][j] = arr[i - 1][j - 1];
-				} else if (i != j && from.charAt(i-1) == to.charAt(j-1)) {
-					arr[i][j] = arr[i][j - 1];
-				} else {
-					if(i>1)
-					arr[i][j] =Math.min(arr[i-1][j], arr[i][j - 1] + 1);
-					else
-						arr[i][j] =arr[i][j - 1] + 1;
+					arr[sourceIndex][targetIndex] = arr[sourceIndex - 1][targetIndex - 1];
+				} 
+				else {
+					int insert = arr[sourceIndex][targetIndex -1 ] + 1;
+					int delete = arr[sourceIndex - 1][targetIndex] + 1;
+					int substitute = arr[sourceIndex - 1][targetIndex -1 ] + 1;
+					arr[sourceIndex][targetIndex] = Math.min(Math.min(insert, delete),substitute);
 				}
 			}
 		}
