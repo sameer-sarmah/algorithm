@@ -35,7 +35,10 @@ public class JobScheduling {
 				}
 				else {
 					jobValue[jobIndex][timeSlot] = Math.max(jobValue[jobIndex][timeSlot - 1],jobValue[jobIndex - 1][timeSlot]);
-					pickedJobsByTimeSlots.set(timeSlot, 0);
+					if(pickedJobsByTimeSlots.get(timeSlot) == job.id) {
+						pickedJobsByTimeSlots.set(timeSlot, 0);
+					}
+					
 				}
 			}
 		}
@@ -65,8 +68,11 @@ public class JobScheduling {
 	}
 	
 	private static void deallocateTimeSlots(JobInfo job) {
-		for(int index= job.startTimeSlot;index<= job.endTimeSlot; index++) {
-			pickedJobsByTimeSlots.set(index, 0);
+		List<JobInfo> jobsToRemove = getPickedJobsInTimeSlots(job.startTimeSlot,job.endTimeSlot);
+		for(JobInfo jobToRemove : jobsToRemove) {
+			for(int index= jobToRemove.startTimeSlot;index<= jobToRemove.endTimeSlot; index++) {
+				pickedJobsByTimeSlots.set(index, 0);
+			}
 		}
 	}
 	
