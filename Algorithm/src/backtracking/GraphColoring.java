@@ -22,14 +22,7 @@ public class GraphColoring {
 
 	public static void main(String[] args) {
 		GraphColoring gc = new GraphColoring();
-		gc.colorInitialization();
 		gc.assignColor(0);
-	}
-
-	public void colorInitialization() {
-		for (int i = 0; i < graph.length; i++)
-			colors[i] = 0;
-
 	}
 
 	public void assignColor(int node) {
