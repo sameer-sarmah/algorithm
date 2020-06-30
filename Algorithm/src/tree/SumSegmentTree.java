@@ -1,5 +1,6 @@
 package tree;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -16,7 +17,7 @@ import org.javatuples.Pair;
 public class SumSegmentTree {
 
 	public static void main(String[] args) {
-		List<Integer> numbers = IntStream.rangeClosed(1, 4).boxed().collect(Collectors.toList());
+		List<Integer> numbers = Arrays.asList(-1,3,4,0,2,1);
 		SummableSegmentedTreeNode tree=convertToSegmentedTree(numbers,0,numbers.size()-1);
 		BFSSummableSegmentTree traverser=new  BFSSummableSegmentTree();
 		traverser.bfs(tree);
@@ -28,7 +29,16 @@ public class SumSegmentTree {
 	    sum=findSumInRange(tree,rangeQueried);
 		System.out.println(sum);
 	}
+	/*
+	when we issue a range query the queried range is important e.g range [2,4] for a sum segment tree which represents the array [-1,3,4,0,2,1] 
+	1.	totally overlap( one is a sublist of other )
+	In this case we return the value of the node
+	2.	partially overlap
+	we traverse to the left as well as right subtree till we get a total overlap
+	3.	no overlap
+	In this case we return the huge arbitary value or null
 
+	 * */
 	private static  Number findSumInRange(SummableSegmentedTreeNode node,Pair<Integer,Integer> rangeQueried) {
 		int fromIndex=node.getFrom();
 		int toIndex=node.getTo();
