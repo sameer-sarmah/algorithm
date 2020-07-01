@@ -13,8 +13,9 @@ public class TwoThreeTreeNode<T extends Comparable<T>> {
 	 * is to make the node more generic as well as to let this node handle the operations of setting and getting the child
 	 * e.g getLeftChild computes the left child from the list of children
 	 * and the NodeComparator sets the min node as left child,the consumer should not care about this internal computations.
+	 * 
 	 * */
-	private List<TwoThreeTreeNode<T>> nodeArr = new ArrayList<>();
+	private List<TwoThreeTreeNode<T>> childNodes = new ArrayList<>();
 	private TwoThreeTreeNode<T> parent;
 
 	public List<T> getKeys() {
@@ -30,10 +31,10 @@ public class TwoThreeTreeNode<T extends Comparable<T>> {
 
 
 	public void addNode(TwoThreeTreeNode<T> node) {
-		if (this.nodeArr.size() < MAX_SIZE)
+		if (this.childNodes.size() < MAX_SIZE)
 		{
-			this.nodeArr.add(node);
-			Collections.sort(this.nodeArr,new NodeComparator<T>());
+			this.childNodes.add(node);
+			Collections.sort(this.childNodes,new NodeComparator<T>());
 		}
 	}
 
@@ -67,7 +68,7 @@ public class TwoThreeTreeNode<T extends Comparable<T>> {
 	
 	public TwoThreeTreeNode<T> getLeftChild() {
 		T leftKey=this.keys.get(0);
-		for(TwoThreeTreeNode<T>  child : this.nodeArr) {
+		for(TwoThreeTreeNode<T>  child : this.childNodes) {
 			if(leftKey.compareTo(child.getKeys().get(0)) > 0) {
 				return child;
 			}
@@ -83,7 +84,7 @@ public class TwoThreeTreeNode<T extends Comparable<T>> {
 		else {
 			T leftKey=this.keys.get(0);
 			T rightKey=this.keys.get(this.keys.size()-1);
-			for(TwoThreeTreeNode<T>  child : this.nodeArr) {
+			for(TwoThreeTreeNode<T>  child : this.childNodes) {
 				if((leftKey.compareTo(child.getKeys().get(0)) < 0) && (rightKey.compareTo(child.getKeys().get(0)) > 0)) {
 					return child;
 				}
@@ -95,7 +96,7 @@ public class TwoThreeTreeNode<T extends Comparable<T>> {
 	
 	public TwoThreeTreeNode<T> getRightChild() {
 		T rightKey=this.keys.get(this.keys.size()-1);
-		for(TwoThreeTreeNode<T>  child : this.nodeArr) {
+		for(TwoThreeTreeNode<T>  child : this.childNodes) {
 			if(rightKey.compareTo(child.getKeys().get(0)) < 0) {
 				return child;
 			}
@@ -104,8 +105,8 @@ public class TwoThreeTreeNode<T extends Comparable<T>> {
 		return null;
 	}
 	public void clearChildren() {
-		if(this.nodeArr != null)
-		this.nodeArr.clear();
+		if(this.childNodes != null)
+		this.childNodes.clear();
 	}
 	
 	
@@ -114,11 +115,11 @@ public class TwoThreeTreeNode<T extends Comparable<T>> {
 	}
 	
 	public boolean removeChild(TwoThreeTreeNode<T> child) {
-		return this.nodeArr.remove(child);
+		return this.childNodes.remove(child);
 	}
 	
 	public boolean hasChildren() {
-		if(this.nodeArr != null && !this.nodeArr.isEmpty()) {
+		if(this.childNodes != null && !this.childNodes.isEmpty()) {
 			return true;
 		}
 		else {
@@ -133,7 +134,7 @@ public class TwoThreeTreeNode<T extends Comparable<T>> {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((keys == null) ? 0 : keys.hashCode());
-		result = prime * result + ((nodeArr == null) ? 0 : nodeArr.hashCode());
+		result = prime * result + ((childNodes == null) ? 0 : childNodes.hashCode());
 		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		return result;
 	}

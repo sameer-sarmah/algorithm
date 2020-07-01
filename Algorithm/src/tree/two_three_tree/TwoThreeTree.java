@@ -30,7 +30,12 @@ public class TwoThreeTree<T extends Comparable<T>> {
     	insert(value,root);
     }
     
-    
+    /**
+     * Insertion has these scenarios
+	 * 1.when the node has less than 2 elements
+	 * 2.when the node has 2 elements but the parent has 1 element
+	 * 3.when the node has 2 elements and the parent also has 2 elements
+     * */
 	private void insert(T value,TwoThreeTreeNode<T> currentNode) {
 		TwoThreeTreeNode<T> node = new TwoThreeTreeNode<T>();
 		node.addKey(value);
