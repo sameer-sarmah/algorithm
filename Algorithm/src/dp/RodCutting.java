@@ -29,37 +29,37 @@ public class RodCutting {
 			
 			for(int lengthOfRod=1;lengthOfRod<=lengthOfRodToCut;lengthOfRod++){
 				
-					int max=0;
+					int maxValue=0;
 					int finalizedLengthAtWhichToCut=-1;
 					for(int lengthAtWhichToCut=1;lengthAtWhichToCut<=lengthOfRod;lengthAtWhichToCut++){
-						Integer firstFragment = null;
-						Integer secondFragment = null;
+						Integer firstFragmentValue = null;
+						Integer secondFragmentValue = null;
 						if(length_maxRodValue.get(lengthAtWhichToCut) != null) {
-							firstFragment = length_maxRodValue.get(lengthAtWhichToCut).getValue();
+							firstFragmentValue = length_maxRodValue.get(lengthAtWhichToCut).getValue();
 						}
 						else {
-							firstFragment=length_value.get(lengthAtWhichToCut);
+							firstFragmentValue=length_value.get(lengthAtWhichToCut);
 						}
 						
 						if(length_maxRodValue.get(lengthOfRod-lengthAtWhichToCut) != null) {
-							secondFragment = length_maxRodValue.get(lengthOfRod-lengthAtWhichToCut).getValue();
+							secondFragmentValue = length_maxRodValue.get(lengthOfRod-lengthAtWhichToCut).getValue();
 						}
 						else {
-							secondFragment=length_value.get(lengthOfRod-lengthAtWhichToCut);
+							secondFragmentValue=length_value.get(lengthOfRod-lengthAtWhichToCut);
 						}
 						
-						if(firstFragment!=null && secondFragment!=null){
-							int total=firstFragment + secondFragment;
-							if(total>max){
+						if(firstFragmentValue!=null && secondFragmentValue!=null){
+							int totalValue=firstFragmentValue + secondFragmentValue;
+							if(totalValue>maxValue){
 								finalizedLengthAtWhichToCut=lengthAtWhichToCut;
-								max=total;
+								maxValue=totalValue;
 							}	
 						}
 						
 					}
 					Integer firstFragmentValue = null;
 					Integer secondFragmentValue = null;
-					MaxRodValue maxRV=new MaxRodValue(lengthOfRod,max);
+					MaxRodValue maxRV=new MaxRodValue(lengthOfRod,maxValue);
 					if(length_maxRodValue.get(finalizedLengthAtWhichToCut) != null) {
 						firstFragmentValue = length_maxRodValue.get(finalizedLengthAtWhichToCut).getValue();
 					}

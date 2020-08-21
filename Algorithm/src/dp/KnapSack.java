@@ -35,7 +35,7 @@ public class KnapSack {
 					itemsToWeightMatrix[itemId][weight] = itemsToWeightMatrix[itemId - 1][weight];
 				} 
 				else {
-					int existingValueWithoutThisItem = itemsToWeightMatrix[itemId][weight - it.getWeight()];
+					int existingValueWithoutThisItem = itemsToWeightMatrix[itemId  -1][weight];
 					int updatedValueAfterIncludingThisItem = itemsToWeightMatrix[itemId][weight - it.getWeight()] + it.getValue();
 					itemsToWeightMatrix[itemId][weight] = Math.max(existingValueWithoutThisItem,updatedValueAfterIncludingThisItem);
 				}
