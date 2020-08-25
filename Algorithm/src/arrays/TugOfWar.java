@@ -9,7 +9,7 @@ import java.util.List;
  * is as minimum as possible.
  * 
  * */
-public class TagOfWar {
+public class TugOfWar {
 
 	//static int[] numbers = { 3, 4, 5, -3, 100, 1, 89, 54, 23, 20 };
 	static int[] numbers = { 100, 1, 89, 54, 23, 20 };

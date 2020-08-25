@@ -22,7 +22,7 @@ we have to divide the elements of a list of size 4 into two sub lists ,if we use
 
 [3,4] [1,2]
  * */
-public class TagOfWarWithStringPermutation {
+public class TugOfWarWithStringPermutation {
 
 	public static void main(String[] args) {
 		int[] numbers ={3, 4, 5, -3, 100, 1, 89, 54, 23, 20};
