@@ -2,24 +2,101 @@ package tree;
 
 import java.util.Stack;
 
-public class DFS<T extends Comparable<T>> {
-	private Stack<TreeNode<T>> stack = new Stack<>(); 
+public class DFS {
 
-	public void dfs(TreeNode<T> node){
-		System.out.println(node.getValue());
-		
-		if(node.getLeft()!=null) {
-			stack.add(node.getLeft());
-		}
-
-		if(!stack.isEmpty())
-			dfs(stack.pop());
-		
-		if(node.getRight()!=null) {
-			stack.add(node.getRight());
-		}
-
-		if(!stack.isEmpty())
-			dfs(stack.pop());
+	public static void main(String[] args) {
+		TreeNode<Integer> tree = TreeCreator.createBinarySearchTree();
+		Stack<TreeNode<Integer>> stack =new Stack<>();
+		stack.add(tree);
+		//inorder(tree);
+		inorderWithStack(stack);
 	}
+	
+	private static void inorderWithStack(Stack<TreeNode<Integer>> stack) {
+		if(!stack.isEmpty()) {
+			TreeNode<Integer> node = stack.pop();
+			if(node.left != null) {
+				stack.add(node.left);
+				inorderWithStack(stack);
+			}
+			
+			System.out.println(node.value);
+			
+			if(node.right != null) {
+				stack.add(node.right);
+				inorderWithStack(stack);
+			}
+			
+		}
+	}
+	
+	private static void postorderWithStack(Stack<TreeNode<Integer>> stack) {
+		if(!stack.isEmpty()) {
+			TreeNode<Integer> node = stack.pop();
+			if(node.left != null) {
+				stack.add(node.left);
+				postorderWithStack(stack);
+			}
+			if(node.right != null) {
+				stack.add(node.right);
+				postorderWithStack(stack);
+			}
+			System.out.println(node.value);
+		}
+	}
+	
+	private static void preorderWithStack(Stack<TreeNode<Integer>> stack) {
+		if(!stack.isEmpty()) {
+			TreeNode<Integer> node = stack.pop();
+			System.out.println(node.value);
+			if(node.left != null) {
+				stack.add(node.left);
+				preorderWithStack(stack);
+			}
+			if(node.right != null) {
+				stack.add(node.right);
+				preorderWithStack(stack);
+			}
+		}
+	}
+	
+	private static void preorder(TreeNode<Integer> node) {
+		System.out.println(node.value);
+		if(node.left != null) {
+			preorder(node.left);
+		}
+		if(node.right != null) {
+			preorder(node.right);
+		}
+		
+	}
+	
+	private static void postorder(TreeNode<Integer> node) {
+		
+		if(node.left != null) {
+			preorder(node.left);
+		}
+		if(node.right != null) {
+			preorder(node.right);
+		}
+		System.out.println(node.value);
+		
+	}
+	
+	private static void inorder(TreeNode<Integer> node) {
+		
+		if(node.left != null) {
+			preorder(node.left);
+		}
+		
+		System.out.println(node.value);
+		
+		if(node.right != null) {
+			preorder(node.right);
+		}
+		
+		
+	}
+
+
 }
