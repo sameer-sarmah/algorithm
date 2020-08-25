@@ -8,8 +8,8 @@ public class DFS {
 		TreeNode<Integer> tree = TreeCreator.createBinarySearchTree();
 		Stack<TreeNode<Integer>> stack =new Stack<>();
 		stack.add(tree);
-		//inorder(tree);
-		inorderWithStack(stack);
+		postorder(tree);
+		//inorderWithStack(stack);
 	}
 	
 	private static void inorderWithStack(Stack<TreeNode<Integer>> stack) {
@@ -74,10 +74,10 @@ public class DFS {
 	private static void postorder(TreeNode<Integer> node) {
 		
 		if(node.left != null) {
-			preorder(node.left);
+			postorder(node.left);
 		}
 		if(node.right != null) {
-			preorder(node.right);
+			postorder(node.right);
 		}
 		System.out.println(node.value);
 		
@@ -86,13 +86,13 @@ public class DFS {
 	private static void inorder(TreeNode<Integer> node) {
 		
 		if(node.left != null) {
-			preorder(node.left);
+			inorder(node.left);
 		}
 		
 		System.out.println(node.value);
 		
 		if(node.right != null) {
-			preorder(node.right);
+			inorder(node.right);
 		}
 		
 		
