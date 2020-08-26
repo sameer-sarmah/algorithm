@@ -30,6 +30,16 @@ public class TreeCreator {
 		return root;
 	} 
 	
+	public static TreeNode<Integer> createBinaryTree(){
+		TreeNode<Integer> root = createNode(20, null);
+		TreeNode<Integer> parent = assignLeftRight(root,createNode(18,root),createNode(30,root));
+		TreeNode<Integer> left = parent.getLeft();
+		TreeNode<Integer> right = parent.getRight();
+		assignLeftRight(left,createNode(15,left),createNode(5,left));
+		assignLeftRight(right,createNode(35,right),createNode(25,right));
+		return root;
+	} 
+	
 	public static TreeNode<Integer> createSubTree(){
 		TreeNode<Integer> root = createNode(30, null);
 		assignLeftRight(root,createNode(25,root),createNode(35,root));
