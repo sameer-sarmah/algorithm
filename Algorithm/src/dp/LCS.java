@@ -1,8 +1,6 @@
 package dp;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,26 +11,24 @@ import org.javatuples.Pair;
 //longest consecutive subsequence
 public class LCS {
 	private static List<Integer> numbers = Arrays.asList(36, 41, 56, 35, 44, 33, 34, 92, 43, 32, 42);
-	private static Map<Integer,Integer> numberMap = new HashMap<>();
 	public static void main(String[] args) {
 		//LicUsingSort(numbers);
-		LicUsingMap( numbers,numberMap);
+		LicUsingMap( numbers);
 	}
 	
-	private static void LicUsingMap(List<Integer> numbers ,Map<Integer,Integer> numberMap) {
+	private static void LicUsingMap(List<Integer> numbers) {
 		int maxSequenceLength =0;
 		int maxNumberInSequence = 0;
 		Map<Integer,Integer> numberToSequenceLength = new HashMap<>();
 		for(int number:numbers) {
-			numberMap.put(number, number);
 			numberToSequenceLength.put(number, 1);
 		}
 		for(int index=0;index < numbers.size() ;index++) {
-			if(numberMap.get(numbers.get(index) - 1) == null && numberMap.get(numbers.get(index) + 1) != null ) {
+			if(numberToSequenceLength.get(numbers.get(index) - 1) == null && numberToSequenceLength.get(numbers.get(index) + 1) != null ) {
 				//sequence starts with this number
 				Pair<Integer, Integer> sequenceTuple = Pair.with(maxSequenceLength, maxNumberInSequence);
 				sequenceTuple = traverse(numbers.get(index) + 1,numberToSequenceLength,sequenceTuple);
-				System.out.println("for number "+numberMap.get(numbers.get(index))+" ,maxSequenceLength: "+sequenceTuple.getValue0()+" maxNumberInSequence: "+sequenceTuple.getValue1());
+				System.out.println("for number "+numbers.get(index)+" ,maxSequenceLength: "+sequenceTuple.getValue0()+" maxNumberInSequence: "+sequenceTuple.getValue1());
 				if(maxSequenceLength < sequenceTuple.getValue0()) {
 					maxSequenceLength = sequenceTuple.getValue0();
 					maxNumberInSequence = sequenceTuple.getValue1();
@@ -42,7 +38,7 @@ public class LCS {
 		}
 		System.out.println("numbers forming the sequence");
 		while(maxSequenceLength>0) {
-			System.out.println(numberMap.get(maxNumberInSequence));
+			System.out.println(maxNumberInSequence);
 			--maxNumberInSequence;
 			--maxSequenceLength;
 		}
@@ -50,7 +46,7 @@ public class LCS {
 	}
 	
 	private static Pair<Integer, Integer> traverse(Integer number ,Map<Integer,Integer> numberToSequenceLength,Pair<Integer, Integer> sequenceTuple) {
-		if(numberMap.get(number) != null && numberMap.get(number - 1) != null) {
+		if(numberToSequenceLength.get(number) != null && numberToSequenceLength.get(number - 1) != null) {
 			int maxSequenceLength = sequenceTuple.getValue0();
 		    int maxNumberInSequence = sequenceTuple.getValue1();
 			int sequenceLength = numberToSequenceLength.get(number) + numberToSequenceLength.get(number - 1);
@@ -61,7 +57,7 @@ public class LCS {
 				maxNumberInSequence = number;
 			}
 			Pair<Integer, Integer> updatedSequenceTuple = Pair.with(maxSequenceLength, maxNumberInSequence);
-			if(numberMap.get(number + 1) != null) {
+			if(numberToSequenceLength.get(number + 1) != null) {
 				return traverse(number + 1,numberToSequenceLength,updatedSequenceTuple);
 			}
 			else
