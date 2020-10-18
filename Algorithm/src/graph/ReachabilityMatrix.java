@@ -18,8 +18,9 @@ public class ReachabilityMatrix {
 		List<Integer> visited=new ArrayList<>();
 		int[][] reachabilityMatrix = new int[am.length][am.length];
 		for(int currentNode = 0 ;currentNode < am.length ; currentNode++) {
-			visited.clear();
+			
 			for(int target = 0 ;target < am.length ; target++) {
+				visited.clear();
 				if(currentNode == target) {
 					reachabilityMatrix[currentNode][currentNode] = 1;
 				}

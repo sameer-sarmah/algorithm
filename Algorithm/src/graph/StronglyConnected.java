@@ -21,8 +21,9 @@ public class StronglyConnected {
 	public static void main(String[] args) {
 		List<Integer> visited=new ArrayList<>();
 		for(int source = 0 ; source < am.length ;source++) {
-			visited.clear();
+			
 			for(int target = 0 ; target < am.length ;target++) {
+				visited.clear();
 				if(isConnected(source,target,visited)) {
 					connectivityMatrix[source][target] = 1;
 				}
@@ -49,6 +50,7 @@ public class StronglyConnected {
 	}
 	
 	private static boolean isConnected(int currentNode,int target,List<Integer> visited) {
+		visited.add(currentNode);
 		int[] connections = am[currentNode];
 		for(int node = 0 ; node < am.length ;node++) {
 			if(node == target) {
