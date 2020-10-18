@@ -53,7 +53,7 @@ public class StronglyConnected {
 		visited.add(currentNode);
 		int[] connections = am[currentNode];
 		for(int node = 0 ; node < am.length ;node++) {
-			if(node == target) {
+			if(node == target && connections[node] < MAX_VALUE && connections[node] > 0) {
 				return true;
 			}
 			if(connections[node] < MAX_VALUE && connections[node] > 0 && !visited.contains(node)) {
